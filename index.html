@@ -1,0 +1,980 @@
+<title>Skyline Technology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=BIZ+UDPGothic:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #EEF1F5;
+    --surface: #FFFFFF;
+    --surface-2: #F7F9FC;
+    --border: #D3DBE4;
+    --text: #101B2A;
+    --text-muted: #5B6B7D;
+    --accent: #C15F27;
+    --accent-contrast: #FFF8F1;
+    --accent-soft: rgba(193, 95, 39, 0.10);
+    --found-bg: #101B2A;
+    --found-text: #EDF1F6;
+    --found-muted: #93A6B8;
+    --found-border: #24344A;
+    color-scheme: light dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0E1826;
+      --surface: #172538;
+      --surface-2: #1C2C42;
+      --border: #2E4258;
+      --text: #EDF1F6;
+      --text-muted: #93A6B8;
+      --accent: #E2884F;
+      --accent-contrast: #1B1006;
+      --accent-soft: rgba(226, 136, 79, 0.16);
+      --found-bg: #060B12;
+      --found-text: #EDF1F6;
+      --found-muted: #7C90A3;
+      --found-border: #1B2837;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0E1826;
+    --surface: #172538;
+    --surface-2: #1C2C42;
+    --border: #2E4258;
+    --text: #EDF1F6;
+    --text-muted: #93A6B8;
+    --accent: #E2884F;
+    --accent-contrast: #1B1006;
+    --accent-soft: rgba(226, 136, 79, 0.16);
+    --found-bg: #060B12;
+    --found-text: #EDF1F6;
+    --found-muted: #7C90A3;
+    --found-border: #1B2837;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "BIZ UDPGothic", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img, svg { max-width: 100%; display: block; }
+
+  h1, h2, h3 {
+    font-family: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
+    font-weight: 900;
+    margin: 0;
+    text-wrap: balance;
+    letter-spacing: 0.01em;
+  }
+
+  a { color: inherit; }
+
+  .mono {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 18px;
+    height: 1px;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  section { padding: 88px 0; }
+
+  /* ---------- header ---------- */
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    height: 76px;
+  }
+
+  .wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .wordmark strong {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 900;
+    font-size: 1.32rem;
+    letter-spacing: 0.01em;
+    color: var(--text);
+  }
+
+  .wordmark span {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 3px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus-visible { color: var(--text); border-color: var(--accent); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 12px 22px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .btn-primary { background: var(--accent); color: var(--accent-contrast); }
+  .btn-primary:hover { filter: brightness(1.06); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .btn-sm { padding: 10px 16px; font-size: 0.76rem; }
+
+  a.btn:focus-visible, button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ---------- notice bar ---------- */
+
+  .notice {
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .notice-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 16px 28px;
+  }
+
+  .notice-inner .eyebrow {
+    flex-shrink: 0;
+    padding-top: 3px;
+  }
+
+  .notice-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .notice-item {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    column-gap: 16px;
+    font-size: 0.86rem;
+  }
+
+  .notice-item + .notice-item {
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  .notice-date {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+
+  .notice-text { color: var(--text); }
+
+  .notice-link {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    text-decoration: none;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .notice-link:hover { text-decoration: underline; }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    padding-top: 76px;
+    padding-bottom: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 42px 42px;
+    background-position: center top;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 96%);
+    mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 96%);
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    padding-top: 64px;
+    max-width: 860px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.3rem, 4.6vw, 3.6rem);
+    line-height: 1.2;
+    margin-top: 20px;
+  }
+
+  .hero p.lead {
+    max-width: 42em;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-top: 22px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 34px;
+    flex-wrap: wrap;
+  }
+
+  .skyline-wrap { position: relative; z-index: 1; margin-top: 64px; }
+
+  .skyline-caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 10px 28px 0;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .win-a { animation: glow 5.5s ease-in-out infinite; }
+  }
+  @keyframes glow {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+
+  /* ---------- stats (dimension line) ---------- */
+
+  .stats {
+    padding: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stat {
+    padding: 40px 28px;
+    border-left: 1px solid var(--border);
+  }
+  .stat:first-child { border-left: none; }
+
+  .stat-tick { width: 22px; height: 2px; background: var(--accent); margin-bottom: 16px; }
+
+  .stat-value {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat-label {
+    margin-top: 8px;
+    font-size: 0.86rem;
+    color: var(--text-muted);
+  }
+
+  /* ---------- generic section head ---------- */
+
+  .section-head { max-width: 620px; margin-bottom: 56px; }
+  .section-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin-top: 18px; }
+  .section-head p { margin-top: 16px; color: var(--text-muted); max-width: 34em; }
+
+  /* ---------- floors / elevation ---------- */
+
+  .elevation { position: relative; }
+
+  .floor-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .floor-list::before {
+    content: "";
+    position: absolute;
+    left: 39px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .floor {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 28px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .floor:first-child { padding-top: 0; }
+  .floor:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .floor-tag {
+    position: relative;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--text);
+    display: flex;
+    align-items: flex-start;
+    padding-top: 4px;
+  }
+
+  .floor-tag::before {
+    content: "";
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    margin-right: 12px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .floor.foundation .floor-tag { color: var(--found-text); }
+  .floor.foundation .floor-tag::before { background: var(--accent); border-color: var(--accent); }
+
+  .floor-body h3 {
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    font-weight: 700;
+  }
+
+  .floor-body p { color: var(--text-muted); margin: 10px 0 0; max-width: 46em; }
+
+  .floor-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .floor-pills li {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 5px 10px;
+  }
+
+  .floor.foundation {
+    background: var(--accent-soft);
+    margin: 0 -28px;
+    padding: 26px 28px;
+    border-radius: 6px;
+    border-bottom: none;
+  }
+
+  /* ---------- case studies ---------- */
+
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .case-card {
+    background: var(--surface);
+    padding: 32px 26px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .case-tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .case-card h3 {
+    font-size: 1.12rem;
+    font-weight: 700;
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+
+  .case-card p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-top: 12px;
+    flex-grow: 1;
+  }
+
+  .case-metric {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .case-metric .num {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .case-metric .desc { font-size: 0.8rem; color: var(--text-muted); }
+
+  /* ---------- careers ---------- */
+
+  .careers {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 56px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .careers h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-top: 16px; }
+  .careers p { color: var(--text-muted); margin-top: 14px; max-width: 34em; }
+
+  .role-list { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+
+  .role-list li {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.76rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 12px;
+    background: var(--surface);
+  }
+
+  .careers-side {
+    border-left: 1px solid var(--border);
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .careers-side .figure {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: var(--accent);
+  }
+  .careers-side .figure-label { font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; }
+
+  /* ---------- contact / foundation ---------- */
+
+  .foundation {
+    background: var(--found-bg);
+    color: var(--found-text);
+    padding: 92px 0 0;
+  }
+
+  .foundation .eyebrow { color: var(--accent); }
+
+  .foundation h2 {
+    color: var(--found-text);
+    font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+    margin-top: 18px;
+    max-width: 12em;
+  }
+
+  .foundation p.lead { color: var(--found-muted); max-width: 38em; margin-top: 18px; font-size: 1.02rem; }
+
+  .foundation-actions { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+
+  .contact-grid {
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid var(--found-border);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .contact-item .label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--found-muted);
+    text-transform: uppercase;
+  }
+
+  .contact-item .value { margin-top: 8px; font-size: 0.98rem; }
+  .contact-item a { text-decoration: none; }
+  .contact-item a:hover { color: var(--accent); }
+
+  .footer-bar {
+    margin-top: 64px;
+    padding: 26px 0;
+    border-top: 1px solid var(--found-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-bar .copyright {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    color: var(--found-muted);
+  }
+
+  .footer-nav { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+  .footer-nav a { font-size: 0.82rem; color: var(--found-muted); text-decoration: none; }
+  .footer-nav a:hover { color: var(--found-text); }
+
+  .gl-tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: var(--found-muted);
+    border: 1px solid var(--found-border);
+    border-radius: 3px;
+    padding: 4px 8px;
+  }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .notice-inner { flex-direction: column; gap: 10px; padding: 14px 20px; }
+    .notice-link { margin-left: 0; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(3) { border-left: none; }
+    .stat:nth-child(2), .stat:nth-child(4) { border-left: 1px solid var(--border); }
+    .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid var(--border); }
+    .cases-grid { grid-template-columns: 1fr; }
+    .careers { grid-template-columns: 1fr; padding: 40px 28px; }
+    .careers-side { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 24px; flex-direction: row; }
+    .contact-grid { grid-template-columns: 1fr; }
+    section { padding: 64px 0; }
+    .floor { grid-template-columns: 1fr; gap: 10px; }
+    .floor-list::before { left: 5px; }
+    .floor-tag::before { margin-top: 0; }
+  }
+</style>
+
+<header>
+  <div class="wrap nav">
+    <a class="wordmark" href="#top">
+      <strong>SKYLINE</strong>
+      <span>TECHNOLOGY</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">概要</a></li>
+      <li><a href="#services">サービス</a></li>
+      <li><a href="#cases">実績</a></li>
+      <li><a href="#careers">採用情報</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
+    </ul>
+    <a class="btn btn-primary" href="#contact">相談する</a>
+  </div>
+</header>
+
+<div class="notice">
+  <div class="wrap notice-inner">
+    <span class="eyebrow">NEWS</span>
+    <ul class="notice-list">
+      <li class="notice-item">
+        <span class="notice-date mono">2026.09.01</span>
+        <span class="notice-text">大阪オフィスを移転し、新オフィスでの営業を開始しました。</span>
+      </li>
+      <li class="notice-item">
+        <span class="notice-date mono">2026.08.20</span>
+        <span class="notice-text">導入事例セミナー「金融機関のシステム刷新に学ぶ」を10月14日に開催します。</span>
+        <a class="notice-link" href="#contact">詳細を見る →</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <span class="eyebrow">SOFTWARE ARCHITECTURE STUDIO — EST. 2016</span>
+      <h1>都市を設計するように、<span style="white-space: nowrap;">ソフトウェア</span>を組み立てる。</h1>
+      <p class="lead">スカイライン・テクノロジーは、要件定義から設計・開発・運用までを一気通貫で担うソフトウェア開発会社です。継ぎ足しでは崩れる一枚岩ではなく、増改築に耐える建物のような構造を、コードで実現します。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contact">無料相談を予約する</a>
+        <a class="btn btn-ghost" href="#cases">導入事例を見る</a>
+      </div>
+    </div>
+
+    <div class="skyline-wrap">
+      <svg viewBox="0 0 1200 300" role="img" aria-label="夕暮れの東京の街並みをモチーフにしたスカイラインのイラスト">
+        <defs>
+          <pattern id="winLit" width="13" height="17" patternUnits="userSpaceOnUse">
+            <rect x="4" y="4" width="5" height="7" fill="var(--accent)" opacity="0.8" class="win-a"></rect>
+          </pattern>
+          <pattern id="winDim" width="13" height="17" patternUnits="userSpaceOnUse">
+            <rect x="4" y="4" width="5" height="7" fill="var(--bg)" opacity="0.5"></rect>
+          </pattern>
+        </defs>
+
+        <g fill="var(--text)" opacity="0.9">
+          <rect x="20"  y="140" width="65" height="120"></rect>
+          <rect x="95"  y="85"  width="45" height="175"></rect>
+          <rect x="150" y="160" width="85" height="100"></rect>
+          <rect x="245" y="45"  width="55" height="215"></rect>
+          <rect x="310" y="180" width="40" height="80"></rect>
+          <rect x="360" y="110" width="70" height="150"></rect>
+          <rect x="440" y="65"  width="50" height="195"></rect>
+          <rect x="500" y="135" width="95" height="125"></rect>
+          <rect x="605" y="95"  width="42" height="165"></rect>
+          <rect x="660" y="170" width="60" height="90"></rect>
+          <rect x="730" y="50"  width="50" height="210"></rect>
+          <rect x="795" y="120" width="75" height="140"></rect>
+          <rect x="880" y="85"  width="46" height="175"></rect>
+          <rect x="940" y="155" width="65" height="105"></rect>
+          <rect x="1015" y="70" width="55" height="190"></rect>
+          <rect x="1080" y="130" width="55" height="130"></rect>
+          <rect x="1145" y="160" width="35" height="100"></rect>
+        </g>
+
+        <rect x="245" y="45" width="55" height="215" fill="url(#winLit)"></rect>
+        <rect x="440" y="65" width="50" height="195" fill="url(#winDim)"></rect>
+        <rect x="730" y="50" width="50" height="210" fill="url(#winLit)"></rect>
+        <rect x="1015" y="70" width="55" height="190" fill="url(#winDim)"></rect>
+        <rect x="95"  y="85" width="45" height="175" fill="url(#winDim)"></rect>
+
+        <line x1="0" y1="260" x2="1200" y2="260" stroke="var(--border)" stroke-width="1"></line>
+
+        <g class="mono" font-family="IBM Plex Mono, monospace">
+          <line x1="245" y1="45" x2="200" y2="45" stroke="var(--text-muted)" stroke-width="1"></line>
+          <line x1="200" y1="45" x2="200" y2="30" stroke="var(--text-muted)" stroke-width="1"></line>
+          <text x="196" y="24" font-size="12" fill="var(--text-muted)" text-anchor="end">215M</text>
+        </g>
+
+        <g class="mono" font-family="IBM Plex Mono, monospace" fill="var(--text-muted)" font-size="11" letter-spacing="1">
+          <text x="20" y="278">N35°39' E139°42'</text>
+          <text x="1180" y="278" text-anchor="end">GROUND LEVEL — 0M</text>
+        </g>
+      </svg>
+      <div class="skyline-caption">
+        <span>SHIBUYA, TOKYO</span>
+        <span>ELEVATION VIEW — FIG. 01</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" id="about">
+    <div class="wrap stats-row">
+      <div class="stat">
+        <div class="stat-tick"></div>
+        <div class="stat-value">2016</div>
+        <div class="stat-label">設立年</div>
+      </div>
+      <div class="stat">
+        <div class="stat-tick"></div>
+        <div class="stat-value">128<span style="font-size:0.5em;">名</span></div>
+        <div class="stat-label">エンジニア・デザイナー在籍数</div>
+      </div>
+      <div class="stat">
+        <div class="stat-tick"></div>
+        <div class="stat-value">340<span style="font-size:0.5em;">+</span></div>
+        <div class="stat-label">累計リリースプロジェクト数</div>
+      </div>
+      <div class="stat">
+        <div class="stat-tick"></div>
+        <div class="stat-value">99.98<span style="font-size:0.5em;">%</span></div>
+        <div class="stat-label">主要基盤の年間稼働率 (SLA)</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">SERVICES — BUILDING ELEVATION</span>
+        <h2>5つの階層で、<br>プロダクトを支える。</h2>
+        <p>利用者に近い上階から、それを支える地下の基盤まで。断面図のように積み上がった専門チームが、一つの建物として機能します。</p>
+      </div>
+
+      <div class="elevation">
+        <ol class="floor-list">
+          <li class="floor">
+            <div class="floor-tag">5F</div>
+            <div class="floor-body">
+              <h3>プロダクト開発</h3>
+              <p>事業目標からプロダクト戦略とロードマップを描き、要件定義からリリース、グロースまでを一貫して伴走します。</p>
+              <ul class="floor-pills">
+                <li>プロダクト戦略</li><li>要件定義</li><li>ロードマップ設計</li>
+              </ul>
+            </div>
+          </li>
+          <li class="floor">
+            <div class="floor-tag">4F</div>
+            <div class="floor-body">
+              <h3>UI/UXデザイン</h3>
+              <p>ユーザー調査に基づく情報設計から、デザインシステムの構築、実装可能なプロトタイピングまでを担当します。</p>
+              <ul class="floor-pills">
+                <li>ユーザーリサーチ</li><li>デザインシステム</li><li>プロトタイピング</li>
+              </ul>
+            </div>
+          </li>
+          <li class="floor">
+            <div class="floor-tag">3F</div>
+            <div class="floor-body">
+              <h3>アプリケーション開発</h3>
+              <p>Web／モバイルアプリケーションの設計・実装を、拡張性とメンテナンス性を両立するアーキテクチャで進めます。</p>
+              <ul class="floor-pills">
+                <li>Webアプリ開発</li><li>モバイルアプリ開発</li><li>API設計</li>
+              </ul>
+            </div>
+          </li>
+          <li class="floor">
+            <div class="floor-tag">2F</div>
+            <div class="floor-body">
+              <h3>クラウドインフラストラクチャ</h3>
+              <p>AWS／GCP上の基盤構築からCI/CDパイプライン、SREによる運用体制の設計までを内製で支援します。</p>
+              <ul class="floor-pills">
+                <li>クラウド基盤構築</li><li>CI/CD</li><li>SRE運用</li>
+              </ul>
+            </div>
+          </li>
+          <li class="floor foundation">
+            <div class="floor-tag">B1F</div>
+            <div class="floor-body">
+              <h3>データ基盤 &amp; セキュリティ</h3>
+              <p>すべての階層を支える基礎工事として、データパイプライン、可観測性、セキュリティ診断を継続的に整備します。</p>
+              <ul class="floor-pills">
+                <li>データパイプライン</li><li>可観測性 (Observability)</li><li>セキュリティ診断</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="cases">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">CASE STUDIES</span>
+        <h2>導入事例</h2>
+        <p>業界も規模も異なる3社の事例です。いずれも既存システムの構造から見直し、数字で成果を測れる形にしています。</p>
+      </div>
+
+      <div class="cases-grid">
+        <article class="case-card">
+          <span class="case-tag">金融 / 地方銀行A社</span>
+          <h3>オンラインバンキングの刷新と勘定系連携API再構築</h3>
+          <p>老朽化したフロントエンドと勘定系システムの間に整合性の取れたAPI層を新設し、審査承認フローを再設計しました。</p>
+          <div class="case-metric">
+            <span class="num">-62%</span>
+            <span class="desc">口座開設の平均リードタイム</span>
+          </div>
+        </article>
+        <article class="case-card">
+          <span class="case-tag">製造 / 精密機器メーカーB社</span>
+          <h3>IoT予知保全プラットフォームの構築</h3>
+          <p>工場設備のセンサーデータをリアルタイムに集約するデータ基盤を構築し、異常兆候の早期検知を実現しました。</p>
+          <div class="case-metric">
+            <span class="num">-480h</span>
+            <span class="desc">年間の設備停止時間</span>
+          </div>
+        </article>
+        <article class="case-card">
+          <span class="case-tag">小売 / D2CアパレルC社</span>
+          <h3>受発注・在庫連携システムの統合</h3>
+          <p>複数倉庫と物流APIを統合したリアルタイム在庫連携基盤を構築し、繁忙期の欠品リスクを抑制しました。</p>
+          <div class="case-metric">
+            <span class="num">1.2%</span>
+            <span class="desc">繁忙期の欠品率（従来8.0%）</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="careers">
+    <div class="wrap">
+      <div class="careers">
+        <div>
+          <span class="eyebrow">JOIN US</span>
+          <h2>一緒に、都市の<span style="white-space: nowrap;">設計図</span>を描く仲間へ。</h2>
+          <p>職能ごとに階層は分かれていても、見ているのは同じ一つの建物です。裁量を持って設計から運用まで携わりたい方を歓迎します。</p>
+          <ul class="role-list">
+            <li>バックエンドエンジニア</li>
+            <li>SRE</li>
+            <li>プロダクトデザイナー</li>
+            <li>セールスエンジニア</li>
+          </ul>
+          <div style="margin-top:28px;">
+            <a class="btn btn-ghost btn-sm" href="#contact">採用について問い合わせる</a>
+          </div>
+        </div>
+        <div class="careers-side">
+          <div>
+            <div class="figure">128名</div>
+            <div class="figure-label">在籍メンバー数</div>
+          </div>
+          <div>
+            <div class="figure">34%</div>
+            <div class="figure-label">中途入社エンジニアの割合</div>
+          </div>
+          <div>
+            <div class="figure">4拠点</div>
+            <div class="figure-label">東京・大阪・福岡・仙台</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foundation" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">GROUND LEVEL — CONTACT</span>
+    <h2>次の一手を、一緒に設計しませんか。</h2>
+    <p class="lead">現状の課題整理だけのご相談でも構いません。まずは30分、オンラインでお話をお伺いします。</p>
+    <div class="foundation-actions">
+      <a class="btn btn-primary" href="mailto:hello@skyline-technology.jp">無料相談を予約する</a>
+      <a class="btn btn-ghost" href="mailto:hello@skyline-technology.jp" style="border-color: var(--found-border);">hello@skyline-technology.jp</a>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="label">Tel</div>
+        <div class="value"><a href="tel:0312345678">03-1234-5678</a>（平日 10:00–18:00）</div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Address</div>
+        <div class="value">〒150-0002<br>東京都渋谷区渋谷2-21-1 スカイラインビル14F</div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Company</div>
+        <div class="value">株式会社スカイライン・テクノロジー<br>代表取締役 CEO 高峰 佳乃</div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <span class="copyright">© 2026 Skyline Technology, Inc.</span>
+      <ul class="footer-nav">
+        <li><a href="#about">概要</a></li>
+        <li><a href="#services">サービス</a></li>
+        <li><a href="#cases">実績</a></li>
+        <li><a href="#careers">採用情報</a></li>
+      </ul>
+      <span class="gl-tag">GL ±0.00 — TOKYO</span>
+    </div>
+  </div>
+</footer>
